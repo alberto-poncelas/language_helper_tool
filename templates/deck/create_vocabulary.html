@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript">
+  $(function() {
+
+
+
+});
+</script>
+<h2>Create Vocabulary</h2>
+  {% if params.num_vocab > 0 %}
+    <p>There is a vocabulary set stored. You can edit the deck <a href="create_deck">here</a>.</p>
+  {% else %}
+    <p>No Vocabulary</p>
+  {% endif %}
+  <div id="preview_cards" style="overflow-y:scroll;height:300px;;width: 80%;">
+    <table>
+      {%for i in range(0,params.num_vocab )  %} 
+        <tr><td> {{params.vocab_list[i]}} </td> </tr>
+      {%endfor%} 
+    </table>
+  </div>
+<br>
+  <div>
+    <p>Load a new vocabulary:</p>
+    <form id="form_vocab_file" action="_load_vocab_file" method="POST" enctype="multipart/form-data">
+      <fieldset>
+        <div style="float: left;width: 40%;">
+          <label for="vocab_file">Select CSV files...</label>
+          <br>
+          <input type="file" id="vocab_file" name="vocab_file">
+          </div>
+          <div style="float: left;width: 40%;">
+          <label>...or paste the vocabulary here:</label>
+          <textarea rows="10" cols="50" name="vocab_text" style="font-size:12px;overflow-y:scroll;"></textarea>
+        </div>
+      </fieldset>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+
+
+{% endblock %}

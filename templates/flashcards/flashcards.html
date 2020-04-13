@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript">
+  $(function() {
+
+    var opt = {{ opt|tojson }};
+
+
+    var get_qa = function() {
+      $.getJSON($SCRIPT_ROOT + '/_getQA', {
+        num_candidates: opt.num_candidates
+      }, function(data) {
+        $('#question_text').empty(); //clean previous results
+        $('#answer_text').empty(); //clean previous results
+        $('#answer_text').val(""); //clean previous results
+        $('#question_text').val(data.q);   
+        $('#answer_text').attr("hvalue",data.a);
+        fill_answ_candidates_buttons(data.candidates)
+        var show_advance=$('#show_advance').attr("checked")
+        if ( show_advance ){
+          setTimeout(function(){solve()}, 3000)
+        }
+      });
+      return false;
+    };
+
+
+    //Uncover answer
+    $('.solve').bind('click', function(e) {
+      solve()
+    });
+
+
+
+   var solve = function() {
+    var answ = $('#answer_text').attr("hvalue");
+    $('#answer_text').val(answ)
+    setTimeout(function(){get_qa()}, 1000)
+   }
+
+
+
+  var fill_answ_candidates_buttons = function(cand_list) {
+    var num_candidates=opt.num_candidates
+    for(var i=0;i<num_candidates;i++){
+      var cur_cand=cand_list[i]
+      $("input#candidate_answ_"+i).val(cur_cand);
+    }
+  }
+
+
+  var execute_on_init = function() {
+    //create_answ_candidates_buttons(opt.num_candidates)
+    get_qa()
+   }
+  execute_on_init()
+
+
+
+
+});
+</script>
+<h1>Flashcards</h1>
+<p style="font-size:20px">
+  <textarea id="question_text" rows="1" cols="30" style="font-size:50px"></textarea>
+  <br>
+  <textarea id="answer_text" rows="1" cols="30" style="font-size:50px"></textarea>
+  <br>
+  <button id="show" class="solve">Show</button>
+  <input type="checkbox" id="show_advance" name="show_advance"> Show and advance to next (after 1 second) </input>
+  <br>
+
+<div id="option_list">
+  {%for i in range(0, opt.num_candidates)%} 
+    <input type="button" id="candidate_answ_{{i}}" value="EMPTY" class="solve"/><br> 
+  {%endfor%} 
+</div>
+
+{% endblock %}

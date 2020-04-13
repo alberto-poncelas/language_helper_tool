@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript">
+  $(function() {
+
+});
+</script>
+<h2>Build Deck</h2>
+  <fieldset>
+    <h3>Current Deck</h3>
+      <div id="preview_cards" style="overflow-y:scroll;height:100px;;width: 80%;">
+      <table>
+        {%for elem in params.current_deck  %} 
+          <tr>
+            <td> {{elem[1]}} </td> 
+            <td> {{elem[2]}} </td> 
+          </tr>
+        {%endfor%} 
+      </table>
+  </div>
+  </fieldset>
+  <br>
+  <fieldset>
+    <form id="form_create_deck" action="create_deck" method="POST">
+      <h3>Create new Deck</h3>
+      <label>Split in groups of</label> <input name="split_in" type="text" size="2" value={{params.split_in}}> <label> cards</label>
+      <br>
+      <label>Subdeck number</label> <input name="subdeck_number" type="text" size="2" value={{params.subdeck_number}}> 
+      <br>
+      <input id="load_deck" type="submit" value="Load Deck">
+    </form> 
+  <br>
+    <form id="form_submit_deck" action="_submit_deck" method="POST">
+      <h4>Preview Deck</h4>
+      <table>
+        {%for i in range(0,params.num_vocab )  %} 
+        <tr>
+        <td> <input type="checkbox"  name="card" value="{{params.vocab_id[i]}} " checked="true" > </td> 
+        <td> {{params.vocab_src[i]}} </td> 
+        <td> {{params.vocab_trg[i]}} </td> 
+        </tr>
+        {%endfor%} 
+      </table>
+      <input id="submitdeck" type="submit" value="Submit Deck">
+    </form> 
+  </fieldset>
+  <br>
+  
+
+
+
+
+{% endblock %}

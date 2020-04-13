@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+  <br>
+  <div style="float: left;width: 75%;">
+    <table>
+    {%for i in range(0,result.text_size )  %} 
+      <tr><td> {{result.text[i]}} </td> </tr>
+      {% if result.pronunciation %}
+        <tr><td style="font-size:12px"> {{result.pronunciation[i]}} </td> </tr>
+      {% endif %}
+      <tr><td style="border-bottom: 1px solid black;"> {{result.translated[i]}} </td> </tr>
+    {%endfor%} 
+    </table>
+  </div>
+  <div style="float: right;width: 25%;">
+    <textarea rows="20" cols="25" style="font-size:18px">{{result.word_count}}</textarea>
+  </div>
+
+
+{% endblock %}
+

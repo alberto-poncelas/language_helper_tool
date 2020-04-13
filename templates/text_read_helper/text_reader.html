@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<form  action="text_reader_results" method="POST">
+  <br>
+    <textarea rows="30" cols="120" name="text_to_analize" style="font-size:10px"></textarea>
+    <br>
+    <input id="Analyze" type="submit" value="Analyze">
+</form> 
+
+{% endblock %}

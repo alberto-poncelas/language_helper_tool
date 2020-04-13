@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript">
+  $(function() {
+
+
+  $('input[name="answer_method"]').bind('click', function(e) {
+    //$('input[name="num_candidates"]').
+    if ($('#use_candidates').is(':checked')) {
+      $('input[name="num_candidates"]').removeAttr('disabled');
+    }else{
+      $('input[name="num_candidates"]').attr('disabled','true');
+    }
+  });
+
+
+
+
+
+});
+</script>
+<h1>Flashcards</h1>
+
+<form action = "flashcards" method = "POST">
+  <h3>Get deck</h3>
+  <br>
+  <label>Split in</label> <input name="split_in" type="text" size="2" value=8> 
+  <br>
+  <label>subdeck number</label> <input name="subdeck_number" type="text" size="2" value=1> 
+  <br>
+  <h3>Direction</h3>
+  <label for="directions">Choose a car:</label>
+  <select id="directions" name="direction">
+    <option value="0"> → </option>
+    <option value="1"> ← </option>
+  </select>
+  <br>
+  <div id="div_user_answer">
+    <h3>User answer</h3>
+    <br>
+    <input type="radio" id="nothing" name="answer_method" value="nothing" checked="true">
+    <label>nothing</label>
+    <br>
+    <input type="radio" id="input_text" name="answer_method" value="input_text">
+    <label>input_text</label>
+    <br>
+    <input type="radio" id="use_candidates" name="answer_method" value="use_candidates">
+    <label>use_candidates</label>
+    <input name="num_candidates" type="text" size="2" value="3" disabled="true"> 
+  </div>
+  <br>
+  <input type="submit" value="Submit">
+</form> 
+
+{% endblock %}
