@@ -15,6 +15,9 @@ app.register_blueprint(flashcards_api)
 from controllers.Text_Reader_Helper import text_reader_helper_api
 app.register_blueprint(text_reader_helper_api)
 
+from controllers.Text_Getter import text_getter_api
+app.register_blueprint(text_getter_api)
+
 
 
 
@@ -32,6 +35,12 @@ def flashcards():
 @app.route("/text_read")
 def text_read():
     return redirect(url_for('text_reader_helper_api.text_read'))
+
+
+@app.route("/text_getter")
+def text_getter():
+    return redirect(url_for('text_getter_api.text_getter'))
+
 
 
 

@@ -33,7 +33,6 @@ def read_text():
 		"text_size": len(lines),
 		"text": lines, #"\n".join(lines),
 		"translated": translated, #"\n".join(translated),
-		#"pronunciation": pronunciation, #"\n".join(pronunciation),
 		"word_count": "\n".join(word_count)}
 	if lines[0]!=pronunciation[0]:
 		result["pronunciation"]=pronunciation

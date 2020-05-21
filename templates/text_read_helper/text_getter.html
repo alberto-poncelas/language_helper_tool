@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<script type="text/javascript">
+  $(function() {
+
+     $("input:file").change(function (){
+     	var terms=$('input:[name="terms"]').val()
+     	if (terms==""){
+     		alert("Terms should be inserted")
+     	}else{
+			$('#form_text_getter_results').submit();   		
+     	}
+     });
+
+});
+</script>
+
+<form  id="form_text_getter_results" action="text_getter_results" method="POST" enctype="multipart/form-data">
+  <br>
+  	<p>Terms</p>
+    <input name="terms" type="text" value="">
+    <br>
+    <input id="Analyze" type="submit" value="Search in Twitter">
+	<label for="vocab_file">...or upload your file:</label>
+	<input type="file" id="vocab_file" name="sentences_file" value="upload your file">
+  <p style="font-size:10px;">
+    (Search in this language: <input name="lang" type="text" value="" size="2" style="height:15px;width:20px;"> )
+  </p>
+</form> 
+
+{% endblock %}
